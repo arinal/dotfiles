@@ -11,7 +11,7 @@ foreground = #839496
 foreground_dim = #888888
 cursor = #dcdccc
 cursor_foreground = #dcdccc
-background = rgba(0, 0, 0, 0.959595959595959595)
+background = rgba(0, 0, 0, 0.95)
 
 # colors from color0 to color254 can be set
 color0 = #073642

@@ -72,40 +72,40 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $browserspace "0  "
-set $tmuxspace    "1 "
-set $readspace    "2 "
-set $officespace  "3  "
-set $folderspace  "4  "
-set $mediaspace   "5 "
-set $idespace     "6 "
-set $freespace1   "7 "
-set $freespace2   "8 "
-set $chatspace    "9  "
+set $browserspace "1  "
+set $tmuxspace    "2  "
+set $readspace    "3 "
+set $officespace  "4  "
+set $folderspace  "5  "
+set $mediaspace   "6 "
+set $idespace     "7 "
+set $freespace1   "8 "
+set $freespace2   "9 "
+set $chatspace    "0  "
 
 # switch to workspace
-bindsym $mod+0 workspace $browserspace
-bindsym $mod+1 workspace $tmuxspace
-bindsym $mod+2 workspace $readspace
-bindsym $mod+3 workspace $officespace
-bindsym $mod+4 workspace $folderspace
-bindsym $mod+5 workspace $mediaspace
-bindsym $mod+6 workspace $idespace
-bindsym $mod+7 workspace $freespace1
-bindsym $mod+8 workspace $freespace2
-bindsym $mod+9 workspace $chatspace
+bindsym $mod+1 workspace $browserspace
+bindsym $mod+2 workspace $tmuxspace
+bindsym $mod+3 workspace $readspace
+bindsym $mod+4 workspace $officespace
+bindsym $mod+5 workspace $folderspace
+bindsym $mod+6 workspace $mediaspace
+bindsym $mod+7 workspace $idespace
+bindsym $mod+8 workspace $freespace1
+bindsym $mod+9 workspace $freespace2
+bindsym $mod+0 workspace $chatspace
 
 # move focused container to workspace
-bindsym $mod+Shift+0 move container to workspace $browserspace
-bindsym $mod+Shift+1 move container to workspace $tmuxspace   
-bindsym $mod+Shift+2 move container to workspace $readspace   
-bindsym $mod+Shift+3 move container to workspace $officespace 
-bindsym $mod+Shift+4 move container to workspace $folderspace 
-bindsym $mod+Shift+5 move container to workspace $mediaspace  
-bindsym $mod+Shift+6 move container to workspace $idespace    
-bindsym $mod+Shift+7 move container to workspace $freespace1  
-bindsym $mod+Shift+8 move container to workspace $freespace2  
-bindsym $mod+Shift+9 move container to workspace $chatspace   
+bindsym $mod+Shift+1 move container to workspace $browserspace
+bindsym $mod+Shift+2 move container to workspace $tmuxspace   
+bindsym $mod+Shift+3 move container to workspace $readspace   
+bindsym $mod+Shift+4 move container to workspace $officespace 
+bindsym $mod+Shift+5 move container to workspace $folderspace 
+bindsym $mod+Shift+6 move container to workspace $mediaspace  
+bindsym $mod+Shift+7 move container to workspace $idespace    
+bindsym $mod+Shift+8 move container to workspace $freespace1  
+bindsym $mod+Shift+9 move container to workspace $freespace2  
+bindsym $mod+Shift+0 move container to workspace $chatspace   
 
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+n workspace next
@@ -172,8 +172,8 @@ bar {
         status_command  i3blocks -c '.config/i3/i3blocks.conf'
         # status_command python /usr/lib/python3.5/site-packages/powerline/bindings/i3/powerline-i3.py
 
-        # position          top
-        mode              hide
+        position          bottom
+        # mode              hide
         workspace_buttons yes
         font pango:Liberation for Powerline 9
 
@@ -207,5 +207,3 @@ bindsym $mod+minus scratchpad show
 exec /home/arinal/.config/i3/wallcron.sh 5m
 exec_always compton -f
 exec emacs --daemon
-
-# exec python /usr/lib/python3.5/site-packages/powerline/bindings/lemonbar/powerline-lemonbar.py -–i3
