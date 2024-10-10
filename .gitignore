@@ -10,3 +10,5 @@ hyde.conf
 wall.set
 wallbash
 .sort
+
+lazy-lock.json

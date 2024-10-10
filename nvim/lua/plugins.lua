@@ -63,26 +63,17 @@ return {
     end,
   },
 
+  "aznhe21/actions-preview.nvim",
+
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {
-      {
-        modes = {
-          char = {
-            multi_line = false,
-          },
+      modes = {
+        char = {
+          multi_line = false,
         },
       },
-    },
-    -- stylua: ignore
-    keys = {
-      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
 
@@ -99,6 +90,7 @@ return {
 
   {
     "stevearc/conform.nvim",
+    event = "VeryLazy",
     opts = require "configs.conform",
   },
 
@@ -106,6 +98,29 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       require "configs.lspconfig"
+    end,
+  },
+
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("mason-nvim-dap").setup {
+        handlers = {},
+      }
+    end,
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    event = "VeryLazy",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      require "configs.dap"
     end,
   },
 
@@ -259,28 +274,19 @@ return {
   },
 
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    opts = {},
+  },
+
+  {
     "scalameta/nvim-metals",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
     ft = { "scala", "sbt", "java" },
-    opts = function()
-      local config = require("metals").bare_config()
-      local lspconfig = require "nvchad.configs.lspconfig"
-      config.on_attach = lspconfig.on_attach
-      config.on_init = lspconfig.on_init
-      config.capabilities = lspconfig.caps
-      return config
-    end,
-    config = function(self, config)
-      local group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = self.ft,
-        callback = function()
-          require("metals").initialize_or_attach(config)
-        end,
-        group = group,
-      })
-    end,
+    opts = require("configs.lspconfig").metals_opts,
+    config = require("configs.lspconfig").metals_config,
   },
 }

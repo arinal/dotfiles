@@ -27,7 +27,9 @@ map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Neogit" })
 map("n", "<leader>gC", builtin.git_commits, { desc = "Search git commits" })
 map("n", "<leader>gc", builtin.git_bcommits, { desc = "Search git commits for buffer" })
 map("n", "<leader>gB", builtin.git_branches, { desc = "Go to git branch" })
+
 map("n", "<leader>gd", "<cmd>Gitsigns diffthis<cr>    ", { desc = "Diff against the index" })
+map("n", "<leader>gb", "<cmd>Gitsigns blame_line<cr>  ", { desc = "Git blame current line" })
 map("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<cr>   ", { desc = "Go to the previous hunk" })
 map("n", "<leader>gj", "<cmd>Gitsigns next_hunk<cr>   ", { desc = "Go to the next hunk" })
 map("n", "<leader>gv", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview hunk" })
@@ -38,23 +40,49 @@ map("n", "<leader>gW", ":.!gh repo view --web &> /dev/null<cr>", { desc = "View 
 
 -- LSP
 -- stylua: ignore start
-map("n", "gI", "<cmd>:Telescope lsp_implementations<cr>",         { desc = "Go to implementations" })
-map("n", "gR", "<cmd>:Telescope lsp_references<cr>",              { desc = "Go to references" })
-map("i", "<C-h>", function() vim.lsp.buf.signature_help() end,    { desc = "LSP signature help" })
+map("n", "gI", "<cmd>:Telescope lsp_implementations<cr>",          { desc = "Go to implementations" })
+map("n", "gR", "<cmd>:Telescope lsp_references<cr>",               { desc = "Go to references" })
+map("i", "<C-h>", function() vim.lsp.buf.signature_help() end,     { desc = "LSP signature help" })
+map("n", "<leader>le", function() vim.diagnostic.open_float() end, { desc = "Show detailed error" })
 map("n", "<leader>lj", function() vim.diagnostic.goto_next() end, { desc = "Next error" })
 map("n", "<leader>lk", function() vim.diagnostic.goto_prev() end, { desc = "Previous error" })
-map("n", "<leader>la", function() vim.lsp.buf.code_action() end,  { desc = "LSP action" })
+map("n", "<leader>la", function() require'actions-preview'.code_actions() end,  { desc = "LSP action" })
 map("n", "<leader>lr", function() vim.lsp.buf.rename() end,       { desc = "LSP rename" })
 map("n", "<leader>lf", function() require("conform").format { lsp_fallback = true } end, { desc = "format files" })
 -- stylua: ignore end
+
+-- Flash
+local nxo = { "n", "x", "o" }
+local xo = { "x", "o" }
+-- stylua: ignore start
+map(nxo, "s", "<cmd>lua require'flash'.jump()<cr>",       { desc = "Flash" })
+map(nxo, "S", "<cmd>lua require'flash'.treesitter()<cr>", { desc = "Flash Treesitter" })
+map("o", "r", "<cmd>lua require'flash'.remote()<cr>",     { desc = "Remote Flash" })
+map(xo,  "R", "<cmd>lua require'flash'.treesitter_search()<cr>", { desc = "Treesitter Search" })
+map("c", "<c-s>", "<cmd>lua require'flash'.toggle()<cr>",        { desc = "Toggle Flash Search" })
+-- stylua: ignore end
+
+-- DAP
+map("n", "<leader>dd", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Toggle breakpoint" })
+map("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", { desc = "Continue" })
+map("n", "<leader>dC", "<cmd>lua require'dap'.run_to_cursor()<cr>", { desc = "Run to cursor" })
+map("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Step over" })
+map("n", "<leader>dl", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Step into" })
+map("n", "<leader>dk", "<cmd>lua require'dap'.step_back()<cr>", { desc = "Step back" })
+map("n", "<leader>dh", "<cmd>lua require'dap'.step_out()<cr>", { desc = "Step out" })
+map("n", "<leader>dJ", "<cmd>lua require'dap'.down()<cr>", { desc = "Down the stack" })
+map("n", "<leader>dK", "<cmd>lua require'dap'.up()<cr>", { desc = "Up the stack" })
+map("n", "<leader>ds", "<cmd>lua require'dap'.session<cr>", { desc = "Get session" })
+map("n", "<leader>dp", "<cmd>lua require'dap'.pause.toggle()<cr>", { desc = "Pause" })
+map("n", "<leader>d;", "<cmd>lua require'dap'.repl.toggle()<cr>", { desc = "Repl" })
+map("n", "<leader>dx", "<cmd>lua require'dap'.disconnect()<cr>", { desc = "Disconnect" })
 
 map("i", "<C-l>", function()
   vim.fn.feedkeys(vim.fn["copilot#Accept"](), "")
 end, { desc = "Copilot Accept", replace_keycodes = true, nowait = true, silent = true, expr = true, noremap = true })
 
 -- nvim-tree
-local api = require "nvim-tree.api"
-map("n", "<leader>e", api.tree.toggle, { desc = "Open file tree" })
+map("n", "<leader>e", require("nvim-tree.api").tree.toggle, { desc = "Open file tree" })
 map("n", "<leader>E", function()
-  api.tree.toggle { find_file = true }
+  require("nvim-tree.api").tree.toggle { find_file = true }
 end, { desc = "Reveal current file on tree" })
