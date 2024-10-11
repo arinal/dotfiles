@@ -15,11 +15,11 @@ map("n", "<leader>s", "<cmd>update<cr>")
 map("n", "<leader>q", "<cmd>quit<cr>")
 map("t", "<C-u>", "<C-\\><C-n>", { desc = "Terminal normal mode" })
 
+-- stylua: ignore start
 ---- Telescope ------------------------------------------------------------------------------------------------------
 local builtin = require "telescope.builtin"
 map("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find symbols" })
 map("n", "<leader>fS", builtin.lsp_dynamic_workspace_symbols, { desc = "Find dynamic workspace symbols" })
--- map("n", "<leader>fS", builtin.lsp_workspace_symbols, { desc = "Find workspace symbols" })
 map("n", "<leader>fe", "<cmd>Telescope diagnostics<cr>", { desc = "Find dynamic workspace symbols" })
 
 ---- Git -----------------------------------------------------------------------------------------------------------
@@ -39,7 +39,6 @@ map("n", "<leader>gw", ":.!gh pr view --web &> /dev/null<cr>  ", { desc = "View 
 map("n", "<leader>gW", ":.!gh repo view --web &> /dev/null<cr>", { desc = "View github repository" })
 
 ---- LSP ----------------------------------------------------------------------------------------------------------
--- stylua: ignore start
 map("n", "gI", "<cmd>:Telescope lsp_implementations<cr>",          { desc = "Go to implementations" })
 map("n", "gR", "<cmd>:Telescope lsp_references<cr>",               { desc = "Go to references" })
 map("i", "<C-h>", function() vim.lsp.buf.signature_help() end,     { desc = "LSP signature help" })
@@ -49,18 +48,15 @@ map("n", "<leader>lk", function() vim.diagnostic.goto_prev()  end, { desc = "Pre
 map("n", "<leader>la", function() require"actions-preview".code_actions() end, { desc = "LSP action" })
 map("n", "<leader>lr", function() vim.lsp.buf.rename()                    end, { desc = "LSP rename" })
 map("n", "<leader>lf", function() require("conform").format { lsp_fallback = true } end, { desc = "format files" })
--- stylua: ignore end
 
 ---- Flash -------------------------------------------------------------------------------------------------------
 local nxo = { "n", "x", "o" }
-local xo = { "x", "o" }
--- stylua: ignore start
+local xo  = { "x", "o" }
 map(nxo, "s", function() require'flash'.jump()       end, { desc = "Flash" })
 map(nxo, "S", function() require'flash'.treesitter() end, { desc = "Flash Treesitter" })
 map("o", "r", function() require'flash'.remote()     end, { desc = "Remote Flash" })
 map(xo,  "R", function() require'flash'.treesitter_search() end, { desc = "Treesitter Search" })
 map("c", "<c-s>", function() require'flash'.toggle()        end, { desc = "Toggle Flash Search" })
--- stylua: ignore end
 
 ---- DAP --------------------------------------------------------------------------------------------------------
 local function rdap() return require("dap") end
@@ -77,6 +73,7 @@ map("n", "<leader>ds", function() rdap().session()   end, { desc = "Get session"
 map("n", "<leader>dp", function() rdap().pause.toggle() end, { desc = "Pause" })
 map("n", "<leader>d;", function() rdap().repl.toggle()  end, { desc = "Repl" })
 map("n", "<leader>dx", function() rdap().disconnect()   end, { desc = "Disconnect" })
+map("n", "<leader>dq", function() rdap().close()        end, { desc = "Quit" })
 
 map("i", "<C-l>", function()
   vim.fn.feedkeys(vim.fn["copilot#Accept"](), "")
