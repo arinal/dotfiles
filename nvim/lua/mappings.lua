@@ -15,14 +15,14 @@ map("n", "<leader>s", "<cmd>update<cr>")
 map("n", "<leader>q", "<cmd>quit<cr>")
 map("t", "<C-u>", "<C-\\><C-n>", { desc = "Terminal normal mode" })
 
--- telescope
+---- Telescope ------------------------------------------------------------------------------------------------------
 local builtin = require "telescope.builtin"
 map("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find symbols" })
 map("n", "<leader>fS", builtin.lsp_dynamic_workspace_symbols, { desc = "Find dynamic workspace symbols" })
 -- map("n", "<leader>fS", builtin.lsp_workspace_symbols, { desc = "Find workspace symbols" })
 map("n", "<leader>fe", "<cmd>Telescope diagnostics<cr>", { desc = "Find dynamic workspace symbols" })
 
--- git
+---- Git -----------------------------------------------------------------------------------------------------------
 map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Neogit" })
 map("n", "<leader>gC", builtin.git_commits, { desc = "Search git commits" })
 map("n", "<leader>gc", builtin.git_bcommits, { desc = "Search git commits for buffer" })
@@ -38,20 +38,20 @@ map("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", { desc = "Reset buffer"
 map("n", "<leader>gw", ":.!gh pr view --web &> /dev/null<cr>  ", { desc = "View github PR" })
 map("n", "<leader>gW", ":.!gh repo view --web &> /dev/null<cr>", { desc = "View github repository" })
 
--- LSP
+---- LSP ----------------------------------------------------------------------------------------------------------
 -- stylua: ignore start
 map("n", "gI", "<cmd>:Telescope lsp_implementations<cr>",          { desc = "Go to implementations" })
 map("n", "gR", "<cmd>:Telescope lsp_references<cr>",               { desc = "Go to references" })
 map("i", "<C-h>", function() vim.lsp.buf.signature_help() end,     { desc = "LSP signature help" })
 map("n", "<leader>le", function() vim.diagnostic.open_float() end, { desc = "Show detailed error" })
-map("n", "<leader>lj", function() vim.diagnostic.goto_next() end, { desc = "Next error" })
-map("n", "<leader>lk", function() vim.diagnostic.goto_prev() end, { desc = "Previous error" })
-map("n", "<leader>la", function() require'actions-preview'.code_actions() end,  { desc = "LSP action" })
-map("n", "<leader>lr", function() vim.lsp.buf.rename() end,       { desc = "LSP rename" })
+map("n", "<leader>lj", function() vim.diagnostic.goto_next()  end, { desc = "Next error" })
+map("n", "<leader>lk", function() vim.diagnostic.goto_prev()  end, { desc = "Previous error" })
+map("n", "<leader>la", function() require"actions-preview".code_actions() end, { desc = "LSP action" })
+map("n", "<leader>lr", function() vim.lsp.buf.rename()                    end, { desc = "LSP rename" })
 map("n", "<leader>lf", function() require("conform").format { lsp_fallback = true } end, { desc = "format files" })
 -- stylua: ignore end
 
--- Flash
+---- Flash -------------------------------------------------------------------------------------------------------
 local nxo = { "n", "x", "o" }
 local xo = { "x", "o" }
 -- stylua: ignore start
@@ -59,10 +59,10 @@ map(nxo, "s", function() require'flash'.jump()       end, { desc = "Flash" })
 map(nxo, "S", function() require'flash'.treesitter() end, { desc = "Flash Treesitter" })
 map("o", "r", function() require'flash'.remote()     end, { desc = "Remote Flash" })
 map(xo,  "R", function() require'flash'.treesitter_search() end, { desc = "Treesitter Search" })
-map("c", "<c-s>", function() require'flash'.toggle() end,        { desc = "Toggle Flash Search" })
+map("c", "<c-s>", function() require'flash'.toggle()        end, { desc = "Toggle Flash Search" })
 -- stylua: ignore end
 
--- DAP
+---- DAP --------------------------------------------------------------------------------------------------------
 local function rdap() return require("dap") end
 map("n", "<leader>dd", function() rdap().toggle_breakpoint() end, { desc = "Toggle breakpoint" })
 map("n", "<leader>dc", function() rdap().continue()          end, { desc = "Continue" })
@@ -82,8 +82,7 @@ map("i", "<C-l>", function()
   vim.fn.feedkeys(vim.fn["copilot#Accept"](), "")
 end, { desc = "Copilot Accept", replace_keycodes = true, nowait = true, silent = true, expr = true, noremap = true })
 
--- nvim-tree
-map("n", "<leader>e", require("nvim-tree.api").tree.toggle, { desc = "Open file tree" })
-map("n", "<leader>E", function()
-  require("nvim-tree.api").tree.toggle { find_file = true }
-end, { desc = "Reveal current file on tree" })
+---- Nvim Tree -------------------------------------------------------------------------------------------------
+local function rtree() return require("nvim-tree.api").tree end
+map("n", "<leader>e",            rtree().toggle,                          { desc = "Open file tree" })
+map("n", "<leader>E", function() rtree().toggle { find_file = true } end, { desc = "Reveal current file on tree" })
