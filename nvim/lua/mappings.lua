@@ -55,27 +55,28 @@ map("n", "<leader>lf", function() require("conform").format { lsp_fallback = tru
 local nxo = { "n", "x", "o" }
 local xo = { "x", "o" }
 -- stylua: ignore start
-map(nxo, "s", "<cmd>lua require'flash'.jump()<cr>",       { desc = "Flash" })
-map(nxo, "S", "<cmd>lua require'flash'.treesitter()<cr>", { desc = "Flash Treesitter" })
-map("o", "r", "<cmd>lua require'flash'.remote()<cr>",     { desc = "Remote Flash" })
-map(xo,  "R", "<cmd>lua require'flash'.treesitter_search()<cr>", { desc = "Treesitter Search" })
-map("c", "<c-s>", "<cmd>lua require'flash'.toggle()<cr>",        { desc = "Toggle Flash Search" })
+map(nxo, "s", function() require'flash'.jump()       end, { desc = "Flash" })
+map(nxo, "S", function() require'flash'.treesitter() end, { desc = "Flash Treesitter" })
+map("o", "r", function() require'flash'.remote()     end, { desc = "Remote Flash" })
+map(xo,  "R", function() require'flash'.treesitter_search() end, { desc = "Treesitter Search" })
+map("c", "<c-s>", function() require'flash'.toggle() end,        { desc = "Toggle Flash Search" })
 -- stylua: ignore end
 
 -- DAP
-map("n", "<leader>dd", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Toggle breakpoint" })
-map("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", { desc = "Continue" })
-map("n", "<leader>dC", "<cmd>lua require'dap'.run_to_cursor()<cr>", { desc = "Run to cursor" })
-map("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Step over" })
-map("n", "<leader>dl", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Step into" })
-map("n", "<leader>dk", "<cmd>lua require'dap'.step_back()<cr>", { desc = "Step back" })
-map("n", "<leader>dh", "<cmd>lua require'dap'.step_out()<cr>", { desc = "Step out" })
-map("n", "<leader>dJ", "<cmd>lua require'dap'.down()<cr>", { desc = "Down the stack" })
-map("n", "<leader>dK", "<cmd>lua require'dap'.up()<cr>", { desc = "Up the stack" })
-map("n", "<leader>ds", "<cmd>lua require'dap'.session<cr>", { desc = "Get session" })
-map("n", "<leader>dp", "<cmd>lua require'dap'.pause.toggle()<cr>", { desc = "Pause" })
-map("n", "<leader>d;", "<cmd>lua require'dap'.repl.toggle()<cr>", { desc = "Repl" })
-map("n", "<leader>dx", "<cmd>lua require'dap'.disconnect()<cr>", { desc = "Disconnect" })
+local function rdap() return require("dap") end
+map("n", "<leader>dd", function() rdap().toggle_breakpoint() end, { desc = "Toggle breakpoint" })
+map("n", "<leader>dc", function() rdap().continue()          end, { desc = "Continue" })
+map("n", "<leader>dC", function() rdap().run_to_cursor()     end, { desc = "Run to cursor" })
+map("n", "<leader>dj", function() rdap().step_over() end, { desc = "Step over" })
+map("n", "<leader>dl", function() rdap().step_into() end, { desc = "Step into" })
+map("n", "<leader>dk", function() rdap().step_back() end, { desc = "Step back" })
+map("n", "<leader>dh", function() rdap().step_out()  end, { desc = "Step out" })
+map("n", "<leader>dJ", function() rdap().down()      end, { desc = "Down the stack" })
+map("n", "<leader>dK", function() rdap().up()        end, { desc = "Up the stack" })
+map("n", "<leader>ds", function() rdap().session()   end, { desc = "Get session" })
+map("n", "<leader>dp", function() rdap().pause.toggle() end, { desc = "Pause" })
+map("n", "<leader>d;", function() rdap().repl.toggle()  end, { desc = "Repl" })
+map("n", "<leader>dx", function() rdap().disconnect()   end, { desc = "Disconnect" })
 
 map("i", "<C-l>", function()
   vim.fn.feedkeys(vim.fn["copilot#Accept"](), "")
