@@ -16,15 +16,16 @@ map("n", "<leader>q", "<cmd>quit<cr>")
 map("t", "<C-u>", "<C-\\><C-n>", { desc = "Terminal normal mode" })
 
 -- stylua: ignore start
----- Telescope ------------------------------------------------------------------------------------------------------
+
+---- Telescope -----------------------------------------------------------------------------------------------------
 local builtin = require "telescope.builtin"
-map("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find symbols" })
+map("n", "<leader>fs", builtin.lsp_document_symbols,          { desc = "Find symbols" })
 map("n", "<leader>fS", builtin.lsp_dynamic_workspace_symbols, { desc = "Find dynamic workspace symbols" })
-map("n", "<leader>fe", "<cmd>Telescope diagnostics<cr>", { desc = "Find dynamic workspace symbols" })
+map("n", "<leader>fe", "<cmd>Telescope diagnostics<cr>",      { desc = "Find errors" })
 
 ---- Git -----------------------------------------------------------------------------------------------------------
-map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Neogit" })
-map("n", "<leader>gC", builtin.git_commits, { desc = "Search git commits" })
+map("n", "<leader>gg", "<cmd>Neogit<cr>",    { desc = "Neogit" })
+map("n", "<leader>gC", builtin.git_commits,  { desc = "Search git commits" })
 map("n", "<leader>gc", builtin.git_bcommits, { desc = "Search git commits for buffer" })
 map("n", "<leader>gB", builtin.git_branches, { desc = "Go to git branch" })
 
@@ -35,10 +36,14 @@ map("n", "<leader>gj", "<cmd>Gitsigns next_hunk<cr>   ", { desc = "Go to the nex
 map("n", "<leader>gv", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview hunk" })
 map("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>  ", { desc = "Reset hunk" })
 map("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", { desc = "Reset buffer" })
+
+map("n", "<leader>gy", "<cmd>GitLink<cr>",  { desc = "Yank git link" })
+map("n", "<leader>gY", "<cmd>GitLink!<cr>", { desc = "Open git link" })
+
 map("n", "<leader>gw", ":.!gh pr view --web &> /dev/null<cr>  ", { desc = "View github PR" })
 map("n", "<leader>gW", ":.!gh repo view --web &> /dev/null<cr>", { desc = "View github repository" })
 
----- LSP ----------------------------------------------------------------------------------------------------------
+---- LSP -----------------------------------------------------------------------------------------------------------
 map("n", "gI", "<cmd>:Telescope lsp_implementations<cr>",          { desc = "Go to implementations" })
 map("n", "gR", "<cmd>:Telescope lsp_references<cr>",               { desc = "Go to references" })
 map("i", "<C-h>", function() vim.lsp.buf.signature_help() end,     { desc = "LSP signature help" })
@@ -49,7 +54,7 @@ map("n", "<leader>la", function() require"actions-preview".code_actions() end, {
 map("n", "<leader>lr", function() vim.lsp.buf.rename()                    end, { desc = "LSP rename" })
 map("n", "<leader>lf", function() require("conform").format { lsp_fallback = true } end, { desc = "format files" })
 
----- Flash -------------------------------------------------------------------------------------------------------
+---- Flash ---------------------------------------------------------------------------------------------------------
 local nxo = { "n", "x", "o" }
 local xo  = { "x", "o" }
 map(nxo, "s", function() require'flash'.jump()       end, { desc = "Flash" })
@@ -58,7 +63,7 @@ map("o", "r", function() require'flash'.remote()     end, { desc = "Remote Flash
 map(xo,  "R", function() require'flash'.treesitter_search() end, { desc = "Treesitter Search" })
 map("c", "<c-s>", function() require'flash'.toggle()        end, { desc = "Toggle Flash Search" })
 
----- DAP --------------------------------------------------------------------------------------------------------
+---- DAP -----------------------------------------------------------------------------------------------------------
 local function rdap() return require("dap") end
 map("n", "<leader>dd", function() rdap().toggle_breakpoint() end, { desc = "Toggle breakpoint" })
 map("n", "<leader>dc", function() rdap().continue()          end, { desc = "Continue" })
@@ -75,11 +80,12 @@ map("n", "<leader>d;", function() rdap().repl.toggle()  end, { desc = "Repl" })
 map("n", "<leader>dx", function() rdap().disconnect()   end, { desc = "Disconnect" })
 map("n", "<leader>dq", function() rdap().close()        end, { desc = "Quit" })
 
+---- Copilot ------------------------------------------------------------------------------------------------------
 map("i", "<C-l>", function()
   vim.fn.feedkeys(vim.fn["copilot#Accept"](), "")
 end, { desc = "Copilot Accept", replace_keycodes = true, nowait = true, silent = true, expr = true, noremap = true })
 
----- Nvim Tree -------------------------------------------------------------------------------------------------
+---- Nvim Tree -----------------------------------------------------------------------------------------------------
 local function rtree() return require("nvim-tree.api").tree end
 map("n", "<leader>e",            rtree().toggle,                          { desc = "Open file tree" })
 map("n", "<leader>E", function() rtree().toggle { find_file = true } end, { desc = "Reveal current file on tree" })

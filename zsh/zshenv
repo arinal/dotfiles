@@ -15,6 +15,7 @@ export FZF_CTRL_T_OPTS="--color --preview '(highlight -O ansi -l {} 2> /dev/null
 export FZF_CTRL_R_OPTS="--color --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 
 export PATH="$PATH:$HOME/.cargo/bin"
-export PATH=$PATH:/home/arinal/.local/share/coursier/bin
+export PATH=$PATH:$HOME/.local/share/coursier/bin
+export PATH="$PATH:$HOME/.ghcup/bin"
 
 source /usr/share/nvm/init-nvm.sh

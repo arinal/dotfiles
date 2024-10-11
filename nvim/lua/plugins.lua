@@ -67,7 +67,6 @@ return {
 
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
     opts = {
       modes = {
         char = {
@@ -79,14 +78,13 @@ return {
 
   {
     "kylechui/nvim-surround",
-    version = "*",
     event = "VeryLazy",
     config = function()
       require("nvim-surround").setup()
     end,
   },
 
-  { "lambdalisue/vim-suda", event = "VeryLazy" },
+  { "lambdalisue/vim-suda", cmd = "SudaWrite" },
 
   {
     "stevearc/conform.nvim",
@@ -183,6 +181,7 @@ return {
         "scala",
         "java",
         "rust",
+        "haskell",
         "c",
         "go",
         "javascript",
@@ -233,26 +232,22 @@ return {
         },
       }
     end,
-    keys = {
-      { "<leader>gy", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Yank git link" },
-      { "<leader>gY", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
-    },
   },
 
   {
     "NeogitOrg/neogit",
-    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
+    cmd = "Neogit",
     config = true,
   },
 
   {
     "folke/zen-mode.nvim",
-    event = "VeryLazy",
+    cmd = "ZenMode",
     opts = {
       on_open = function(_)
         vim.opt.nu = false
@@ -275,7 +270,7 @@ return {
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    event = "VeryLazy",
+    ft = { "md", "markdown" },
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     opts = {},
   },

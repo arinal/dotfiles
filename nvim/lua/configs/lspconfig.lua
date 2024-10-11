@@ -6,6 +6,8 @@ local servers = {
   "rust_analyzer",
   "clangd",
   "pyright",
+  "hls",
+  "gopls",
   "jdtls",
   "html",
   "cssls",
