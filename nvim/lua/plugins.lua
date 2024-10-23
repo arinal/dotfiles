@@ -269,11 +269,33 @@ return {
   },
 
   {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    ft = "markdown",
+    cmd = "ObsidianSearch",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        { name = "neuron", path = "~/Documents/neuron" },
+      },
+    },
+  },
+
+  {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "md", "markdown" },
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-    opts = {},
+    opts = {
+      -- heading = {
+      -- border_virtual = true,
+      -- border = true,
+      -- },
+    },
   },
+
+  { "glacambre/firenvim", build = ":call firenvim#install(0)", lazy = false },
 
   {
     "scalameta/nvim-metals",

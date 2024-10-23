@@ -23,6 +23,19 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+vim.api.nvim_create_user_command(
+  'DiagnosticsToggleVirtualText',
+  function()
+    local current_value = vim.diagnostic.config().virtual_text
+    if current_value then
+      vim.diagnostic.config({virtual_text = false})
+    else
+      vim.diagnostic.config({virtual_text = true})
+    end
+  end,
+  {}
+)
+
 local M = {
   metals_opts = function()
     local metals = require "metals"

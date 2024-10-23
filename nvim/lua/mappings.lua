@@ -22,6 +22,7 @@ local builtin = require "telescope.builtin"
 map("n", "<leader>fs", builtin.lsp_document_symbols,          { desc = "Find symbols" })
 map("n", "<leader>fS", builtin.lsp_dynamic_workspace_symbols, { desc = "Find dynamic workspace symbols" })
 map("n", "<leader>fe", "<cmd>Telescope diagnostics<cr>",      { desc = "Find errors" })
+map("n", "<leader>fn", "<cmd>ObsidianSearch<cr>",             { desc = "Find obsidian notes" })
 
 ---- Git -----------------------------------------------------------------------------------------------------------
 map("n", "<leader>gg", "<cmd>Neogit<cr>",    { desc = "Neogit" })
@@ -50,9 +51,10 @@ map("i", "<C-h>", function() vim.lsp.buf.signature_help() end,     { desc = "LSP
 map("n", "<leader>le", function() vim.diagnostic.open_float() end, { desc = "Show detailed error" })
 map("n", "<leader>lj", function() vim.diagnostic.goto_next()  end, { desc = "Next error" })
 map("n", "<leader>lk", function() vim.diagnostic.goto_prev()  end, { desc = "Previous error" })
-map("n", "<leader>la", function() require"actions-preview".code_actions() end, { desc = "LSP action" })
 map("n", "<leader>lr", function() vim.lsp.buf.rename()                    end, { desc = "LSP rename" })
+map("n", "<leader>la", function() require"actions-preview".code_actions() end, { desc = "LSP action" })
 map("n", "<leader>lf", function() require("conform").format { lsp_fallback = true } end, { desc = "format files" })
+map('n', '<leader>li', ':lua vim.cmd("DiagnosticsToggleVirtualText")<CR>', { desc = "Toggle diagnostic virtual text" })
 
 ---- Flash ---------------------------------------------------------------------------------------------------------
 local nxo = { "n", "x", "o" }
@@ -89,3 +91,7 @@ end, { desc = "Copilot Accept", replace_keycodes = true, nowait = true, silent =
 local function rtree() return require("nvim-tree.api").tree end
 map("n", "<leader>e",            rtree().toggle,                          { desc = "Open file tree" })
 map("n", "<leader>E", function() rtree().toggle { find_file = true } end, { desc = "Reveal current file on tree" })
+
+---- Obsidian -----------------------------------------------------------------------------------------------------
+map("n", "<leader>oo", "<cmd>ObsidianFollowLink<cr>",     { desc = "Follow link" })
+map("n", "<C-S l>"   , "<cmd>ObsidianToggleCheckbox<cr>", { desc = "Toggle checkbox" })

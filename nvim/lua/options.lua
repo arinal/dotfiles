@@ -10,8 +10,13 @@ o.backup = false
 o.undodir = os.getenv "HOME" .. "/.vim/undodir"
 o.undofile = true
 o.scrolloff = 8
-
 o.shada = "!,'500,<50,@100,s10,h"
+
+vim.g.firenvim_config = {
+  localSettings = {
+    [".*"] = { takeover = "never" },
+  },
+}
 
 if vim.g.neovide then
   vim.g.neovide_padding_top = 10
@@ -21,7 +26,7 @@ if vim.g.neovide then
 
   vim.g.neovide_cursor_vfx_mode = "sonicboom"
 
-  vim.g.neovide_scale_factor = 0.9
+  vim.g.neovide_scale_factor = 0.8
   local change_scale_factor = function(delta)
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
   end
