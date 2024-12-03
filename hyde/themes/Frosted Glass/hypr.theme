@@ -29,12 +29,16 @@ group {
 
 decoration {
     rounding = 13
-    drop_shadow = false
-    shadow_ignore_window = true
-    shadow_offset = 0 0
-    shadow_range = 15
-    shadow_render_power = 1
-    col.shadow = 0x80ffffff
+
+    # shadow {
+    #    range = 15
+    #    ignore_window = true
+    #    render_power = 1
+    #    offset = 0 0
+    #    color = 0x80ffffff
+    #    color_inactive = rgba(86aaeccc)
+    # }
+
     active_opacity = 0.75
     inactive_opacity = 0.75
 

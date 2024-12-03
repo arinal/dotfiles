@@ -197,6 +197,21 @@ return {
   },
 
   {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    event = "VeryLazy",
+    config = function()
+      local harpoon = require("harpoon")
+      harpoon:setup()
+      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+      vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+      vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+    end,
+  },
+
+  {
     "jinh0/eyeliner.nvim",
     event = "VeryLazy",
     config = function()
@@ -225,9 +240,11 @@ return {
         router = {
           browse = {
             ["^github.bamtech.co"] = require("gitlinker.routers").github_browse,
+            ["^github.twdcgrid.net"] = require("gitlinker.routers").github_browse,
           },
           blame = {
             ["^github.bamtech.co"] = require("gitlinker.routers").github_blame,
+            ["^github.twdcgrid.net"] = require("gitlinker.routers").github_browse,
           },
         },
       }
@@ -280,6 +297,9 @@ return {
       workspaces = {
         { name = "neuron", path = "~/Documents/neuron" },
       },
+      templates = {
+        folder = "3 - Resources/Templates",
+      }
     },
   },
 

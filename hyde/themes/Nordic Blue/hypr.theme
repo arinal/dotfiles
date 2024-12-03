@@ -15,25 +15,27 @@ general {
     gaps_out = 8
     border_size = 2
     col.active_border = rgba(5A9ACAB4) rgba(ECD3A0FF) 45deg
-    col.inactive_border = rgba(1E8B50D9) rgba(32B032D9) 45deg
+    # col.inactive_border = rgba(1E8B50D9) rgba(32B032D9) 45deg
     layout = dwindle
     resize_on_border = true
 }
 
 group {
     col.border_active = rgba(5A9ACAB4) rgba(ECD3A0FF) 45deg
-    col.border_inactive = rgba(1E8B50D9) rgba(32B032D9) 45deg
+    # col.border_inactive = rgba(1E8B50D9) rgba(32B032D9) 45deg
     col.border_locked_active = rgba(5A9ACAB4) rgba(ECD3A0FF) 45deg
-    col.border_locked_inactive = rgba(1E8B50D9) rgba(32B032D9) 45deg
+    # col.border_locked_inactive = rgba(1E8B50D9) rgba(32B032D9) 45deg
 }
 
 decoration {
     rounding = 7
-    drop_shadow = true
-    shadow_range = 30
-    shadow_render_power = 9
-    col.shadow = rgba(5A9ACAB4)
-    col.shadow_inactive=rgba(1E8B50D9)
+
+    shadow {
+        range = 30
+        render_power = 9
+        color = rgba(5A9ACAB4)
+        # color_inactive = rgba(1E8B50D9)
+    }
 
     blur {
         enabled = yes

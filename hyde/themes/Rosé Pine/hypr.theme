@@ -22,11 +22,13 @@ group {
 
 decoration {
     rounding = 10
-    drop_shadow = true
-    shadow_range = 30
-    shadow_render_power = 9
-    col.shadow = rgba(eb6f92ff)
-    col.shadow_inactive=rgba(31748fcc)
+
+    shadow {
+       range = 30
+       render_power = 9
+       color = rgba(eb6f92ff)
+       color_inactive = rgba(31748fcc)
+    }
 
     blur {
         enabled = yes
