@@ -23,7 +23,7 @@ zinit ice lucid wait"1" lucid atload"!_zsh_autosuggest_start"; zinit load zsh-us
 zinit ice from'gh-r' as'program'; zinit light sei40kr/fast-alias-tips-bin
 zinit light sei40kr/zsh-fast-alias-tips
 zinit light zdharma-continuum/fast-syntax-highlighting
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light mafredri/zsh-async
 
 alias f=yy # yazi file manager
@@ -88,5 +88,50 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
+## Ghostty ######
+
+function tth() {
+  ghostty +list-themes --plain | \
+    fzf --prompt "Color theme > " --height 50%  | \
+    sed 's/ (resources)//' | \
+    xargs -I {} sed -i '' "s/theme = .*/theme = {}/" ~/.config/ghostty/config \
+    && osascript \
+      -e 'tell application "Ghostty" to activate' \
+      -e 'tell application "System Events" to keystroke "," using {command down, shift down}'
+}
+
+## Oh My Posh ######
+
+omp_theme="dracula"
+
+function oth() {
+  selected=$(ls $(brew --prefix oh-my-posh)/themes | 
+    sed 's/\.omp\.json$//' | 
+    fzf --preview "oh-my-posh print primary --config $(brew --prefix oh-my-posh)/themes/{}.omp.json" \
+    --height=50% \
+    --layout=reverse \
+    --border=rounded \
+    --prompt="Theme > ")
+  if [[ -n "$selected" ]]; then
+    temp_file=$(mktemp)
+    
+    cat ~/.zshrc | awk -v theme="$selected" '{
+      if ($0 ~ /^omp_theme="[^"]*"/) {
+        print "omp_theme=\"" theme "\""
+      } else {
+        print $0
+      }
+    }' > $temp_file
+    
+    cat $temp_file > ~/.zshrc
+    rm $temp_file
+    eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/$selected.omp.json)"
+    echo "Theme updated to $selected"
+  fi
+}
+
+eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/$omp_theme.omp.json)"
+
 ## p10k, to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true

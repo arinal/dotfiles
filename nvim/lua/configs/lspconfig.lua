@@ -11,6 +11,7 @@ local servers = {
   "jdtls",
   "html",
   "cssls",
+  "smithy_ls",
 }
 
 local nvlsp = require "nvchad.configs.lspconfig"

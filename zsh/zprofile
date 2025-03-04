@@ -2,7 +2,11 @@ if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
-if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  # exec startx
-  exec Hyprland
-fi
+# if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+  # # exec startx
+  # exec Hyprland
+# fi
+
+# >>> coursier install directory >>>
+export PATH="$PATH:/Users/dicky.arinal/Library/Application Support/Coursier/bin"
+# <<< coursier install directory <<<

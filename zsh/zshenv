@@ -2,7 +2,7 @@ export EDITOR=nvim
 export VISUAL=nvim
 export PAGER=bat
 export TERMINAL=kitty
-export BROWSER=firefox
+export BROWSER="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 export HISTFILE=~/.zsh_history
 
 # FZF
@@ -14,8 +14,15 @@ export FZF_ALT_C_OPTS="--color"
 export FZF_CTRL_T_OPTS="--color --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--color --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 
+export PATH="$HOME/Applications/homebrew/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH=$PATH:$HOME/.local/share/coursier/bin
 export PATH="$PATH:$HOME/.ghcup/bin"
 
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
+
+# sdkman
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+. "$HOME/.cargo/env"
