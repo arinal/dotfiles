@@ -11,6 +11,8 @@ local servers = {
   "jdtls",
   "html",
   "cssls",
+  "terraformls",
+  "smithy_ls",
 }
 
 local nvlsp = require "nvchad.configs.lspconfig"
@@ -23,18 +25,14 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-vim.api.nvim_create_user_command(
-  'DiagnosticsToggleVirtualText',
-  function()
-    local current_value = vim.diagnostic.config().virtual_text
-    if current_value then
-      vim.diagnostic.config({virtual_text = false})
-    else
-      vim.diagnostic.config({virtual_text = true})
-    end
-  end,
-  {}
-)
+vim.api.nvim_create_user_command("DiagnosticsToggleVirtualText", function()
+  local current_value = vim.diagnostic.config().virtual_text
+  if current_value then
+    vim.diagnostic.config { virtual_text = false }
+  else
+    vim.diagnostic.config { virtual_text = true }
+  end
+end, {})
 
 local M = {
   metals_opts = function()

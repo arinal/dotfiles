@@ -19,3 +19,8 @@ export PATH=$PATH:$HOME/.local/share/coursier/bin
 export PATH="$PATH:$HOME/.ghcup/bin"
 
 source /usr/share/nvm/init-nvm.sh
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export GEMINI_API_KEY= # insert your api key here

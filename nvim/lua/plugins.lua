@@ -1,5 +1,4 @@
 return {
-
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -202,12 +201,20 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     config = function()
-      local harpoon = require("harpoon")
+      local harpoon = require "harpoon"
       harpoon:setup()
-      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-      vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-      vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+      vim.keymap.set("n", "<leader>a", function()
+        harpoon:list():add()
+      end)
+      vim.keymap.set("n", "<C-e>", function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end)
+      vim.keymap.set("n", "<C-S-P>", function()
+        harpoon:list():prev()
+      end)
+      vim.keymap.set("n", "<C-S-N>", function()
+        harpoon:list():next()
+      end)
     end,
   },
 
@@ -299,7 +306,7 @@ return {
       },
       templates = {
         folder = "3 - Resources/Templates",
-      }
+      },
     },
   },
 
@@ -308,10 +315,11 @@ return {
     ft = { "md", "markdown" },
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     opts = {
+      file_types = { "markdown", "Avante" },
       -- heading = {
       -- border_virtual = true,
       -- border = true,
-      -- },
+      --},
     },
   },
 
@@ -325,5 +333,14 @@ return {
     ft = { "scala", "sbt", "java" },
     opts = require("configs.lspconfig").metals_opts,
     config = require("configs.lspconfig").metals_config,
+  },
+
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false,
+    opts = require "configs.avante",
+    build = "make",
+    dependencies = require("configs.avante").dependencies,
   },
 }
