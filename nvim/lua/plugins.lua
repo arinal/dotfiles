@@ -27,6 +27,15 @@ return {
     },
   },
 
+  -- {
+  --   "echasnovski/mini.nvim",
+  --   version = false,
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("mini.ai").setup()
+  --   end,
+  -- },
+
   {
     "nvim-telescope/telescope-frecency.nvim",
     event = "VeryLazy",
@@ -307,6 +316,18 @@ return {
       templates = {
         folder = "3 - Resources/Templates",
       },
+      mappings = {
+        ["gd"] = {
+          action = function()
+            return require("obsidian").util.smart_action()
+          end,
+          opts = { buffer = true, expr = true },
+        },
+      },
+      follow_url_func = function(url)
+        -- vim.fn.jobstart({ "open", url }) -- macOS
+        vim.fn.jobstart({ "xdg-open", url }) -- Linux
+      end,
     },
   },
 
@@ -316,10 +337,10 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     opts = {
       file_types = { "markdown", "Avante" },
-      -- heading = {
-      -- border_virtual = true,
-      -- border = true,
-      --},
+      heading = {
+        border_virtual = true,
+        border = true,
+      },
     },
   },
 
@@ -343,4 +364,9 @@ return {
     build = "make",
     dependencies = require("configs.avante").dependencies,
   },
+
+  -- {
+  --   "mg979/vim-visual-multi",
+  --   event = "VeryLazy",
+  -- },
 }
