@@ -38,11 +38,13 @@ map("n", "<leader>gv", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview hunk"
 map("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>  ", { desc = "Reset hunk" })
 map("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", { desc = "Reset buffer" })
 
-map("n", "<leader>gy", "<cmd>GitLink<cr>",  { desc = "Yank git link" })
-map("n", "<leader>gY", "<cmd>GitLink!<cr>", { desc = "Open git link" })
+map("n", "<leader>gd", "<cmd>DiffviewOpen origin/main<cr>", { desc = "Reset buffer" })
 
-map("n", "<leader>gw", ":.!gh pr view --web &> /dev/null<cr>  ", { desc = "View github PR" })
-map("n", "<leader>gW", ":.!gh repo view --web &> /dev/null<cr>", { desc = "View github repository" })
+map({"n", "v"}, "<leader>gy", "<cmd>GitLink<cr>",  { desc = "Yank git link" })
+map({"n", "v"}, "<leader>gY", "<cmd>GitLink!<cr>", { desc = "Open git link" })
+
+map("n", "<leader>gw", ":!gh pr view --web &> /dev/null<cr>  ", { desc = "View github PR" })
+map("n", "<leader>gW", ":!gh repo view --web &> /dev/null<cr>", { desc = "View github repository" })
 
 ---- LSP -----------------------------------------------------------------------------------------------------------
 map("n", "gI", "<cmd>:Telescope lsp_implementations<cr>",          { desc = "Go to implementations" })

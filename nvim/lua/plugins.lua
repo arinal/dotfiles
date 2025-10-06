@@ -271,11 +271,26 @@ return {
     "NeogitOrg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
+      -- "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
     cmd = "Neogit",
     config = true,
+  },
+
+  {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
+    -- cmd = { "DiffviewOpen" },
+    -- config = function()
+    --   require("diffview").setup {
+    --     keymaps = {
+    --       view = {
+    --         ["q"] = { "<cmd>DiffviewClose<CR>", desc = "Close Diffview" },
+    --       },
+    --     },
+    --   }
+    -- end,
   },
 
   {
@@ -326,7 +341,7 @@ return {
       },
       follow_url_func = function(url)
         -- vim.fn.jobstart({ "open", url }) -- macOS
-        vim.fn.jobstart({ "xdg-open", url }) -- Linux
+        vim.fn.jobstart { "xdg-open", url } -- Linux
       end,
     },
   },
@@ -357,13 +372,57 @@ return {
   },
 
   {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    version = false,
-    opts = require "configs.avante",
-    build = "make",
-    dependencies = require("configs.avante").dependencies,
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+    keys = {
+      { "<leader>a", nil, desc = "AI/Claude Code" },
+      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<C-,>", "<cmd>ClaudeCodeFocus<cr>", desc = "Claude Code", mode = { "n", "x" } },
+      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      {
+        "<leader>as",
+        "<cmd>ClaudeCodeTreeAdd<cr>",
+        desc = "Add file",
+        ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+      },
+    },
+    opts = {
+      terminal = {
+        ---@module "snacks"
+        ---@type snacks.win.Config|{}
+        snacks_win_opts = {
+          position = "float",
+          width = 0.9,
+          height = 0.9,
+          border = "rounded",
+          keys = {
+            claude_hide = {
+              "<C-,>",
+              function(self)
+                self:hide()
+              end,
+              mode = "t",
+              desc = "Hide",
+            },
+          },
+        },
+      },
+    },
   },
+
+  -- {
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   version = false,
+  --   opts = require "configs.avante",
+  --   build = "make",
+  --   dependencies = require("configs.avante").dependencies,
+  -- },
 
   -- {
   --   "mg979/vim-visual-multi",
