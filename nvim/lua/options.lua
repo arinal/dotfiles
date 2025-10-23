@@ -18,15 +18,21 @@ vim.g.firenvim_config = {
   },
 }
 
+vim.filetype.add {
+  extension = {
+    pp = "json",
+  },
+}
+
 if vim.g.neovide then
-  vim.g.neovide_padding_top = 10
-  vim.g.neovide_padding_bottom = 0
-  vim.g.neovide_padding_right = -80
-  vim.g.neovide_padding_left = 0
+  -- vim.g.neovide_padding_top = 10
+  -- vim.g.neovide_padding_bottom = 0
+  -- vim.g.neovide_padding_right = -80
+  -- vim.g.neovide_padding_left = 0
 
-  vim.g.neovide_cursor_vfx_mode = "sonicboom"
+  -- vim.g.neovide_cursor_vfx_mode = "sonicboom"
 
-  vim.g.neovide_scale_factor = 0.8
+  vim.g.neovide_scale_factor = 0.7
   local change_scale_factor = function(delta)
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
   end

@@ -392,40 +392,30 @@ return {
       },
     },
     opts = {
-      terminal = {
-        ---@module "snacks"
-        ---@type snacks.win.Config|{}
-        snacks_win_opts = {
-          position = "float",
-          width = 0.9,
-          height = 0.9,
-          border = "rounded",
-          keys = {
-            claude_hide = {
-              "<C-,>",
-              function(self)
-                self:hide()
-              end,
-              mode = "t",
-              desc = "Hide",
-            },
-          },
-        },
+      -- terminal = {
+        ----@module "snacks"
+        ----@type snacks.win.Config|{}
+        -- snacks_win_opts = {
+        --   -- position = "float",
+        --   -- width = 0.9,
+        --   -- height = 0.9,
+        --   -- border = "rounded",
+        --   keys = {
+        --     claude_hide = {
+        --       "<C-,>",
+        --       function(self)
+        --         self:hide()
+        --       end,
+        --       mode = "t",
+        --       desc = "Hide",
+        --     },
+        --   },
+        -- },
+      -- },
+      diff_opts = {
+        auto_close_on_accept = true,
+        open_in_current_tab = true,
       },
     },
   },
-
-  -- {
-  --   "yetone/avante.nvim",
-  --   event = "VeryLazy",
-  --   version = false,
-  --   opts = require "configs.avante",
-  --   build = "make",
-  --   dependencies = require("configs.avante").dependencies,
-  -- },
-
-  -- {
-  --   "mg979/vim-visual-multi",
-  --   event = "VeryLazy",
-  -- },
 }

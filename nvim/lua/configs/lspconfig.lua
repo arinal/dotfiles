@@ -1,7 +1,5 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
-
 local servers = {
   "rust_analyzer",
   "clangd",
@@ -17,13 +15,18 @@ local servers = {
 
 local nvlsp = require "nvchad.configs.lspconfig"
 
+-- Use new vim.lsp.enable() API for Neovim 0.11+
+-- This replaces the deprecated lspconfig[server].setup() pattern
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
+  vim.lsp.enable(lsp)
 end
+
+-- Configure LSP behavior globally
+vim.lsp.config('*', {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+})
 
 vim.api.nvim_create_user_command("DiagnosticsToggleVirtualText", function()
   local current_value = vim.diagnostic.config().virtual_text

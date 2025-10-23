@@ -1,8 +1,11 @@
+#!/usr/bin/env zsh
+
 export EDITOR=nvim
 export VISUAL=nvim
 export PAGER=bat
 export TERMINAL=kitty
-export BROWSER=firefox
+# export BROWSER=firefox
+export BROWSER=google-chrome-stable
 export HISTFILE=~/.zsh_history
 
 # FZF
@@ -17,10 +20,14 @@ export FZF_CTRL_R_OPTS="--color --preview 'echo {}' --preview-window down:3:hidd
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH=$PATH:$HOME/.local/share/coursier/bin
 export PATH="$PATH:$HOME/.ghcup/bin"
+export PATH="$PATH:$HOME/.npm-global/bin"
 
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-export GEMINI_API_KEY= # insert your api key here
+# XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+# export ZDOTDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
+# 
+# if ! source $ZDOTDIR/.zshenv; then
+#     echo "FATAL Error: Could not source $ZDOTDIR/.zshenv"
+#     return 1
+# fi
