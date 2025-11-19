@@ -11,3 +11,8 @@ run = "plugin --sync max-preview"
 on   = [ "l" ]
 run  = "plugin --sync smart-enter"
 desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on   = [ "z" ]
+run  = "plugin zoxide"
+desc = "Jump to directory using zoxide"

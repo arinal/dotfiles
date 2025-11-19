@@ -1,0 +1,37 @@
+# Ghostty Terminal Configuration
+# https://ghostty.org/docs/config
+
+# =============================================================================
+# Custom Shaders - Animated Cursor Effects
+# =============================================================================
+# Clone shaders: git clone https://github.com/sahaj-b/ghostty-cursor-shaders shaders
+
+# custom-shader = ~/.config/ghostty/shaders/cursor_warp.glsl
+# custom-shader = ~/.config/ghostty/shaders/ripple_cursor.glsl
+custom-shader = ~/.config/ghostty/shaders/WIP.glsl
+
+# Enable animation loop for shader effects
+custom-shader-animation = always
+
+# =============================================================================
+# Appearance
+# =============================================================================
+theme = Catppuccin Mocha
+# font-family = JetBrainsMono Nerd Font
+font-family = CaskaydiaCove Nerd Font Mono
+font-size = 9
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Window
+window-padding-x = 4
+window-padding-y = 4
+window-decoration = false
+
+# =============================================================================
+# Behavior
+# =============================================================================
+copy-on-select = clipboard
+confirm-close-surface = false

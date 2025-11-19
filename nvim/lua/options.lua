@@ -4,6 +4,7 @@ local o = vim.o
 o.cursorlineopt = "both" -- to enable cursorline!
 o.relativenumber = true
 o.smartindent = true
+o.linebreak = true
 o.smartcase = true
 o.swapfile = false
 o.backup = false
@@ -32,7 +33,7 @@ if vim.g.neovide then
 
   -- vim.g.neovide_cursor_vfx_mode = "sonicboom"
 
-  vim.g.neovide_scale_factor = 0.7
+  vim.g.neovide_scale_factor = 0.6
   local change_scale_factor = function(delta)
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
   end
